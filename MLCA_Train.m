@@ -88,13 +88,13 @@ for sampleNum = 1:size(DATA,1)
             [likelihood,likelihoodN,temp_Ci,temp_NCi] = UpdateLikelihood(temp_Ci,temp_NCi,label,CountLabel,neibhbors,net.refNode,index,Smooth);
             
         else % Case 2 i.e., V >= CIM_k1
-            weight(s1,:) = weight(s1,:) + (1/CountNode(s1)) * (input - weight(s1,:));
             CountNode(s1) = CountNode(s1) + 1;
+            weight(s1,:) = weight(s1,:) + (1/CountNode(s1)) * (input - weight(s1,:));
             CountLabel(s1,:) = CountLabel(s1,:) + label;
             
             if minCIM >= Lcim_s2 % Case 3 i.e., V >= CIM_k2
                 % Update weight of s2 node.
-                weight(s2,:) = weight(s2,:) + (1/(neibhbors*CountNode(s2))) * (input - weight(s2,:));
+                weight(s2,:) = weight(s2,:) + (1/(10*CountNode(s2))) * (input - weight(s2,:));
             end
             
             neibhbors = net.refNode;
